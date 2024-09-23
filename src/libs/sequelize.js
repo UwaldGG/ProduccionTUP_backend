@@ -1,17 +1,18 @@
 const { Sequelize } = require('sequelize');
 
-const { config } = require('../config/config');
+const  { config } = require('../config/config');
 const setupModels = require('./../db/models');
-
+  
 const sequelize = new Sequelize(
-    config.dbName, //name database
-    config.dbUser, //user database
-    config.dbPassword, //password database
+    config.dbName, // name database
+    config.dbUser, // user database
+    config.dbPassword, // password database
     {
-        host: config.dbHost,
-        dialect: 'mysql'
+      host: config.dbHost,
+      dialect: 'mysql' 
     }
-);
+  );
+
 sequelize.sync();
 setupModels(sequelize);
 
