@@ -1,10 +1,21 @@
 // db/models/persona_responsable.model.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../libs/sequelize');
+//const sequelize = require('../libs/sequelize');
 
-class PersonaResponsable extends Model {}
+const PERSONARESPONSABLE_TABLE = 'persona_responsable';
 
-PersonaResponsable.init({
+class PersonaResponsable extends Model {
+  static config (sequelize) {
+    return {
+      sequelize,
+      tableName: PERSONARESPONSABLE_TABLE,
+      modelName: 'PersonaResponsable',
+      timestamps: false,
+    };
+  }
+}
+
+const PersonaResponsableSchema = {
   ID_Persona_responsable: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -22,11 +33,6 @@ PersonaResponsable.init({
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-}, {
-  sequelize,
-  modelName: 'PersonaResponsable',
-  tableName: 'persona_responsable',
-  timestamps: false,
-});
+};
 
-module.exports = PersonaResponsable;
+module.exports = { PersonaResponsable, PersonaResponsableSchema};

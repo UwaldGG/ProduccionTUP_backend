@@ -1,10 +1,20 @@
 // db/models/tareas.model.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../libs/sequelize');
 
-class Tarea extends Model {}
+const TAREAS_TABLE = 'tareas';
 
-Tarea.init({
+class Tarea extends Model {
+  static config(sequelize) {
+    return {
+      sequelize,
+      tableName: TAREAS_TABLE,
+      modelName: 'Tarea',
+      timestamps: false,
+    };
+  }
+}
+
+const TareasSchema = {
   ID_Tareas: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -14,11 +24,6 @@ Tarea.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-}, {
-  sequelize,
-  modelName: 'Tarea',
-  tableName: 'tareas',
-  timestamps: false,
-});
+};
 
-module.exports = Tarea;
+module.exports = { Tarea, TareasSchema };

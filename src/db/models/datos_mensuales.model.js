@@ -1,10 +1,22 @@
 // db/models/datos_mensuales.model.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../libs/sequelize');
+//const sequelize = require('../libs/sequelize');
 
-class DatosMensuales extends Model {}
+const DATOSMENSUALES_TABLE = 'datos_mensuales';
 
-DatosMensuales.init({
+class DatosMensuales extends Model {
+  static config (sequelize) {
+    return {
+      sequelize,
+      tableName: DATOSMENSUALES_TABLE,
+      modelName: 'DatosMensuales',
+      timestamps: false,
+    };
+  }
+}
+
+
+const DatosMensualesSchema = {
   ID_DatosMensuales: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -22,11 +34,6 @@ DatosMensuales.init({
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-}, {
-  sequelize,
-  modelName: 'DatosMensuales',
-  tableName: 'datos_mensuales',
-  timestamps: false,
-});
+};
 
-module.exports = DatosMensuales;
+module.exports = { DatosMensuales, DatosMensualesSchema };

@@ -1,10 +1,21 @@
 // db/models/asignaciones.model.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../libs/sequelize');
 
-class Asignacion extends Model {}
+const ASIGNACIONES_TABLE = 'asignaciones';
 
-Asignacion.init({
+class Asignaciones extends Model {
+    static config(sequelize) {
+      return {
+        sequelize,
+        tableName: ASIGNACIONES_TABLE,
+        modelName: 'Asignaciones',
+        timestamps: false,
+      };
+    }
+
+}
+
+const AsignacionesSchema = {
   ID_Asignacion: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -22,11 +33,6 @@ Asignacion.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-}, {
-  sequelize,
-  modelName: 'Asignacion',
-  tableName: 'asignaciones',
-  timestamps: false,
-});
+};
 
-module.exports = Asignacion;
+module.exports = { Asignaciones, AsignacionesSchema };
