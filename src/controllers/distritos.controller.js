@@ -51,6 +51,16 @@ const _delete = async (req, res) => {
     }
 }
 
+const getTotalDistritos = async (req, res) => {
+    try {
+        const total = await service.count(); // Llamada al método count()
+        res.status(200).json(total);
+    } catch (error) {
+        console.error('Error fetching distritos total:', error);
+        res.status(500).json({ message: 'Error fetching distritos total' });
+    }
+};
+
 module.exports = {
-    create, get, getById, update, _delete
+    create, get, getById, update, _delete, getTotalDistritos
 };

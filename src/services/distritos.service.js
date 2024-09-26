@@ -30,6 +30,11 @@ class DistritosService {
         await model.destroy();
         return { deleted: true };
     }
+
+    async count() {
+        const total = await models.Distrito.count(); // Método count() de Sequelize
+        return total;
+    }
 }
 
 module.exports = DistritosService;

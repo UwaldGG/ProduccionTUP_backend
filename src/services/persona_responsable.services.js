@@ -29,6 +29,11 @@ class PersonaResponsableService {
         await model.destroy();
         return { deleted: true };
     }
+
+    async count() {
+        const total = await models.PersonaResponsable.count();
+        return total;
+    }
 }
 
 module.exports = PersonaResponsableService;

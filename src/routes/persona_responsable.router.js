@@ -3,6 +3,7 @@ const router = express.Router();
 const PersonaResponsableController = require('../controllers/persona_responsable.controller');
 
 router 
+    .get('/total', PersonaResponsableController.getTotalEmpleados)    
     .get('/', PersonaResponsableController.get)
     .get('/:id', PersonaResponsableController.getById)
     .post('/', PersonaResponsableController.create)
