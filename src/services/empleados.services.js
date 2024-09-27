@@ -1,20 +1,20 @@
 const { models } = require('../libs/sequelize');
 
-class PersonaResponsableService {
+class EmpleadosService {
     constructor() {}
 
     async find() {
-        const res = await models.PersonaResponsable.findAll();
+        const res = await models.Empleado.findAll()
         return res;
     }
 
     async findOne(id) {
-        const res = await models.PersonaResponsable.findByPk(id);
+        const res = await models.Empleado.findByPk(id);
         return res;
     }
 
     async create(data) {
-        const res = await models.PersonaResponsable.create(data);
+        const res = await models.Empleado.create(data);
         return res;
     }
 
@@ -31,9 +31,17 @@ class PersonaResponsableService {
     }
 
     async count() {
-        const total = await models.PersonaResponsable.count();
+        const total = await models.Empleado.count();
         return total;
     }
+
+    async findDistrito() {
+        const res = await models.Empleado.findAll({
+          include: [{ model: models.Distrito, as: 'Distrito', attributes: ['NombreDistrito'] }]
+        });
+        return res;  
+    }
+
 }
 
-module.exports = PersonaResponsableService;
+module.exports = EmpleadosService;

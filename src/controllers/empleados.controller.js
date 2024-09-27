@@ -1,5 +1,5 @@
-const PersonaResponsableService = require('../services/persona_responsable.services');
-const service = new PersonaResponsableService();
+const EmpleadosService = require('../services/empleados.services');
+const service = new EmpleadosService();
 
 const create = async ( req, res) => {
     try {
@@ -60,6 +60,17 @@ const getTotalEmpleados = async (req, res) => {
     }
 };
 
+const getDistrito = async (req, res) => {
+    try {
+        const response = await service.findDistrito(); // Llama al método que incluye el distrito
+        res.json(response);
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
+
+
 module.exports = {
-    create, get, getById, update, _delete, getTotalEmpleados
+    create, get, getById, update, _delete, getTotalEmpleados, getDistrito
 };
