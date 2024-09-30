@@ -35,12 +35,24 @@ class EmpleadosService {
         return total;
     }
 
+    // Nueva función para ejecutar el query directamente
     async findDistrito() {
-        const res = await models.Empleado.findAll({
-          include: [{ model: models.Distrito, as: 'Distrito', attributes: ['NombreDistrito'] }]
-        });
-        return res;  
-    }
+        try {
+          const res = await models.Empleado.findAll({
+            include: [
+              {
+                model: models.Distrito,
+                as: 'Distrito', // Asegúrate de que 'Distrito' es el alias correcto
+                attributes: ['NombreDistrito'],
+              },
+            ],
+          });
+          return res;
+        } catch (error) {
+          console.error('Error fetching empleados with distritos:', error); // Esto te dará más detalles del error en la consola del backend
+          throw error;
+        }
+      }
 
 }
 

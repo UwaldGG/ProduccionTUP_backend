@@ -29,6 +29,11 @@ class TareasService {
         await model.destroy();
         return { deleted: true };
     }
+
+    async count() {
+        const total = await models.Tarea.count(); // Método count() de Sequelize
+        return total;
+    }
 }
 
 module.exports = TareasService;

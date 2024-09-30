@@ -1,9 +1,14 @@
 // src/db/models/distritos.model.js
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../../libs/sequelize');
 
 const DISTRITO_TABLE = 'distritos';
 
 class Distrito extends Model {
+    static associate(models) {
+        this.hasMany(models.Empleado, { as: 'empleados', foreignKey: 'fk_distrito' });
+    }
+
     static config(sequelize) {
         return {
             sequelize,

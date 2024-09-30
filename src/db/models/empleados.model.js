@@ -1,13 +1,13 @@
 // db/models/persona_responsable.model.js
 const { Model, DataTypes } = require('sequelize');
-//const sequelize = require('../libs/sequelize');
+const sequelize = require('../../libs/sequelize');
 
 const EMPLEADOS_TABLE = 'empleados';
 
 class Empleado extends Model {
   static associate(models) {
-    this.belongsTo(models.distritos, { as: 'Distrito', foreignKey: 'fk_distrito'});
-  }
+    this.belongsTo(models.Distrito, { as: 'Distrito', foreignKey: 'fk_distrito' });  // Asegúrate de que el alias sea 'Distrito'
+}
 
   static config (sequelize) {
     return {

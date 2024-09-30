@@ -4,7 +4,8 @@ const router = express.Router();
 const distritosController = require('../controllers/distritos.controller');
 
 router
-    .get('/total', distritosController.getTotalDistritos)    
+    .get('/list', distritosController.getDistritos)
+    .get('/total', distritosController.getTotalDistritos)
     .get('/', distritosController.get)
     .get('/:id', distritosController.getById)
     .post('/', distritosController.create)

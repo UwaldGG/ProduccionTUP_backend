@@ -60,10 +60,10 @@ const getTotalEmpleados = async (req, res) => {
     }
 };
 
-const getDistrito = async (req, res) => {
+const getEmpleadosWithDistrito = async (req, res) => {
     try {
-        const response = await service.findDistrito(); // Llama al método que incluye el distrito
-        res.json(response);
+        const empleadosConDistrito = await service.findDistrito();
+        res.json(empleadosConDistrito);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
@@ -72,5 +72,11 @@ const getDistrito = async (req, res) => {
 
 
 module.exports = {
-    create, get, getById, update, _delete, getTotalEmpleados, getDistrito
+    create, 
+    get, 
+    getById, 
+    update, 
+    _delete, 
+    getTotalEmpleados, 
+    getEmpleadosWithDistrito
 };

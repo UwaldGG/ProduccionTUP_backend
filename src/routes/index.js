@@ -13,11 +13,11 @@ function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router); 
   //router.use('/persons', personsRouter);
-  router.use('/Distritos', distritosRouter); // Agregar el router de distritos
-  router.use('/Empleados', empleadosRouter);
-  router.use('/DatosMensuales', datos_mensualesRouter);
-  router.use('/Asignaciones', asignacionesRouter);
-  router.use('/Tareas', tareasRouter);
+  router.use('/distritos', distritosRouter); // Agregar el router de distritos
+  router.use('/empleados', empleadosRouter);
+  router.use('/datosMensuales', datos_mensualesRouter);
+  router.use('/asignaciones', asignacionesRouter);
+  router.use('/tareas', tareasRouter);
 
 
 }

@@ -1,6 +1,7 @@
 // src/controllers/distritos.controller.js
 const DistritosService = require('../services/distritos.service');
 const service = new DistritosService();
+const { Distrito } = require('../db/models/distritos.model');
 
 const create = async (req, res) => {
     try { 
@@ -59,8 +60,18 @@ const getTotalDistritos = async (req, res) => {
         console.error('Error fetching distritos total:', error);
         res.status(500).json({ message: 'Error fetching distritos total' });
     }
+}
+
+
+const getDistritos = async (req, res) => {
+    try {
+        const distritos = await Distrito.findAll();
+        res.json(distritos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving distritos', error });
+    }
 };
 
 module.exports = {
-    create, get, getById, update, _delete, getTotalDistritos
+    create, get, getById, update, _delete, getTotalDistritos, getDistritos
 };
