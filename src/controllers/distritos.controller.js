@@ -72,6 +72,33 @@ const getDistritos = async (req, res) => {
     }
 };
 
+const getWithEmployeeCount = async (req, res) => {
+    try {
+        const response = await service.findWithEmployeeCount();
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+const getDistritosWithEmployeeCount = async (req, res) => {
+    try {
+      const response = await service.findDistritosWithEmployeeCount();
+      res.json({ success: true, data: response });
+    } catch (error) {
+      res.status(500).send({ success: false, message: error.message });
+    }
+  };
+
+
 module.exports = {
-    create, get, getById, update, _delete, getTotalDistritos, getDistritos
+    create, 
+    get, 
+    getById, 
+    update, 
+    _delete, 
+    getTotalDistritos, 
+    getDistritos, 
+    getWithEmployeeCount,
+    getDistritosWithEmployeeCount
 };

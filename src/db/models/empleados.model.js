@@ -6,7 +6,7 @@ const EMPLEADOS_TABLE = 'empleados';
 
 class Empleado extends Model {
   static associate(models) {
-    this.belongsTo(models.Distrito, { as: 'Distrito', foreignKey: 'fk_distrito' });  // Asegúrate de que el alias sea 'Distrito'
+    this.belongsTo(models.Distrito, { as: 'distrito', foreignKey: 'fk_distrito' });  // Asegúrate de que el alias sea 'Distrito'
 }
 
   static config (sequelize) {
@@ -21,9 +21,10 @@ class Empleado extends Model {
 
 const EmpleadoSchema = {
   ID_Empleado: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
+    allowNull: false,
     autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.INTEGER,
   },
   Nombre: {
     type: DataTypes.STRING,
@@ -34,9 +35,14 @@ const EmpleadoSchema = {
     allowNull: false,
   },
   fk_distrito: {
+    field: 'fk_distrito',
+    allowNull: false,
     type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+    references: {
+        model: 'distritos',
+        key: 'ID_Distrito',
+    },
+  }
 };
 
 module.exports = { Empleado, EmpleadoSchema};

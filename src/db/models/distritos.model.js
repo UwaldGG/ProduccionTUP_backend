@@ -1,6 +1,7 @@
 // src/db/models/distritos.model.js
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../libs/sequelize');
+//const sequelize = require('../../libs/sequelize');
+const { Empleado } = require('./empleados.model')
 
 const DISTRITO_TABLE = 'distritos';
 

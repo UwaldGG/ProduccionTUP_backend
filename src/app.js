@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req,res) => {
-    res.send('Backend con NodeJS UP');
+    res.send('NodeJS UP');
 }); 
 
 routerApi(app);

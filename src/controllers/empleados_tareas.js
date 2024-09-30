@@ -1,6 +1,6 @@
-const AsignacionesService = require('../services/asignaciones.service');
-
-const service = new AsignacionesService();
+const EmpleadosTareasService = require('../services/empleados_tareas.service');
+//const { getById } = require('./distritos.controller');
+const service = new EmpleadosTareasService();
 
 const create = async (req, res) => {
     try {
@@ -36,7 +36,7 @@ const update = async (req, res) => {
         const body = req.body;
         const response = await service.update(id, body);
         res.json(response);
-    } catch(error) {
+    } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 }
@@ -51,6 +51,7 @@ const _delete = async (req, res) => {
     }
 }
 
+
 module.exports = {
     create, get, getById, update, _delete
-}
+};

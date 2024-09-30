@@ -4,6 +4,8 @@ const router = express.Router();
 const distritosController = require('../controllers/distritos.controller');
 
 router
+    .get('/empleadocondistrito', distritosController.getDistritosWithEmployeeCount)
+    .get('/with-employee-count', distritosController.getWithEmployeeCount)
     .get('/list', distritosController.getDistritos)
     .get('/total', distritosController.getTotalDistritos)
     .get('/', distritosController.get)

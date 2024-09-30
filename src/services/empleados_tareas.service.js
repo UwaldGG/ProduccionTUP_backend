@@ -1,20 +1,21 @@
 const { models } = require('../libs/sequelize');
+//const EmpleadosService = require('./empleados.services');
 
-class AsignacionesService {
+class EmpleadosTareasService {
     constructor() {}
 
     async find() {
-        const res = await models.Asignaciones.findAll();
+        const res = await models.EmpleadosTareas.findAll();
         return res;
     }
 
     async findOne(id) {
-        const res = await models.Asignaciones.findByPk(id);
+        const res = await models.EmpleadosTareas.findByPk(id);
         return res;
     }
 
     async create(data) {
-        const res = await models.Asignaciones.create(data);
+        const res = await models.EmpleadosTareas.create(data);
         return res;
     }
 
@@ -31,4 +32,4 @@ class AsignacionesService {
     }
 }
 
-module.exports = AsignacionesService;
+module.exports = EmpleadosTareasService;
