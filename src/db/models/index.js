@@ -14,6 +14,8 @@ function setupModels(sequelize) {
 
     Distrito.associate(sequelize.models);
     Empleado.associate(sequelize.models);
+    EmpleadosTareas.associate(sequelize.models);
+    Tarea.associate(sequelize.models);
 }
 
 module.exports = setupModels;

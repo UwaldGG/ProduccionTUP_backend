@@ -69,6 +69,98 @@ const getEmpleadosWithDistrito = async (req, res) => {
     }
 };
 
+const obtenerTareas = async (req, res, next) => {
+    const { nombre, apellido, distrito } = req.query; // Suponiendo que recibes estos parámetros en la query
+    try {
+      const tareas = await service.obtenerTareasPorEmpleadoYDistrito(nombre, apellido, distrito);
+      res.json(tareas);
+    } catch (error) {
+      next(error); // Manejo de errores
+    }
+  };
+
+  const obtenerResumenTareasPorDistrito = async (req, res) => {
+    const { nombreDistrito, mes, año } = req.query; // Asegúrate de pasar estos parámetros en la query
+    try {
+        const resultado = await service.obtenerResumenTareasPorDistrito(nombreDistrito, mes, año);
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener resumen de tareas:", error);
+        return res.status(500).json({ message: "Error al obtener resumen de tareas" });
+    }
+};
+
+const obtenerTotalTareasPorDistrito = async (req, res) => {
+    try {
+        const resultado = await service.obtenerTotalTareasPorDistrito();
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener total de tareas por distrito:", error);
+        return res.status(500).json({ message: "Error al obtener total de tareas por distrito" });
+    }
+};
+
+const obtenerTareasPorEmpleadoYFecha = async (req, res) => {
+    const { nombre, apellido, año } = req.query; // Asegúrate de pasar estos parámetros en la query
+    try {
+        const resultado = await service.obtenerTareasPorEmpleadoYFecha(nombre, apellido, año);
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener tareas por empleado y fecha:", error);
+        return res.status(500).json({ message: "Error al obtener tareas por empleado y fecha" });
+    }
+};
+
+
+const obtenerPromedioTareasPorDistrito = async (req, res) => {
+    const { nombreDistrito } = req.query; // Asegúrate de pasar este parámetro en la query
+    try {
+        const resultado = await service.obtenerPromedioTareasPorDistrito(nombreDistrito);
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener promedio de tareas por distrito:", error);
+        return res.status(500).json({ message: "Error al obtener promedio de tareas por distrito" });
+    }
+};
+
+
+const obtenerDetalleTareasPorMes = async (req, res) => {
+    const { mes, año } = req.query; // Asegúrate de pasar estos parámetros en la query
+    try {
+        const resultado = await service.obtenerDetalleTareasPorMes(mes, año);
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener detalle de tareas:", error);
+        return res.status(500).json({ message: "Error al obtener detalle de tareas" });
+    }
+};
+
+const obtenerEmpleadosSinTareasPorMes = async (req, res) => {
+    const { mes } = req.query; // Asegúrate de pasar este parámetro en la query
+    try {
+        const resultado = await service.obtenerEmpleadosSinTareasPorMes(mes);
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener empleados sin tareas:", error);
+        return res.status(500).json({ message: "Error al obtener empleados sin tareas" });
+    }
+};
+
+
+const obtenerTotalActividadesPorDistrito = async (req, res) => {
+    try {
+        const resultado = await service.obtenerTotalActividadesPorDistrito();
+        return res.json(resultado);
+    } catch (error) {
+        console.error("Error al obtener total de actividades por distrito:", error);
+        return res.status(500).json({ message: "Error al obtener total de actividades por distrito" });
+    }
+};
+
+
+
+
+
 
 
 module.exports = {
@@ -78,5 +170,13 @@ module.exports = {
     update, 
     _delete, 
     getTotalEmpleados, 
-    getEmpleadosWithDistrito
+    getEmpleadosWithDistrito,
+    obtenerTareas,
+    obtenerResumenTareasPorDistrito,
+    obtenerTotalTareasPorDistrito,
+    obtenerTareasPorEmpleadoYFecha,
+    obtenerPromedioTareasPorDistrito,
+    obtenerDetalleTareasPorMes,
+    obtenerEmpleadosSinTareasPorMes,
+    obtenerTotalActividadesPorDistrito
 };

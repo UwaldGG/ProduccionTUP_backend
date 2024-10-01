@@ -1,4 +1,4 @@
-// db/models/persona_responsable.model.js
+
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../../libs/sequelize');
 
@@ -7,7 +7,8 @@ const EMPLEADOS_TABLE = 'empleados';
 class Empleado extends Model {
   static associate(models) {
     this.belongsTo(models.Distrito, { as: 'distrito', foreignKey: 'fk_distrito' });  // Asegúrate de que el alias sea 'Distrito'
-}
+    this.hasMany(models.EmpleadosTareas, { as: 'empleados_tareas', foreignKey: 'fk_empleado'});
+  }
 
   static config (sequelize) {
     return {

@@ -8,6 +8,7 @@ const DISTRITO_TABLE = 'distritos';
 class Distrito extends Model {
     static associate(models) {
         this.hasMany(models.Empleado, { as: 'empleados', foreignKey: 'fk_distrito' });
+        this.hasMany(models.Tarea, { as: 'tareas', foreignKey: 'fk_distrito' });
     }
 
     static config(sequelize) {

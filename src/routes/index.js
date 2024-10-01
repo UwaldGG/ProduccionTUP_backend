@@ -14,7 +14,7 @@ function routerApi(app) {
   //router.use('/persons', personsRouter);
   router.use('/distritos', distritosRouter); // Agregar el router de distritos
   router.use('/empleados', empleadosRouter);
-  router.use('/empleadostareas', empleadosTareasRouter);
+  router.use('/empleados_tareas', empleadosTareasRouter);
   router.use('/tareas', tareasRouter);
 
 

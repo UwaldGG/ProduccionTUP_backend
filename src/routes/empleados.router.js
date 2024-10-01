@@ -4,9 +4,20 @@ const empleadosController = require('../controllers/empleados.controller');
 
 router 
     .get('/list', empleadosController.getEmpleadosWithDistrito)
-    .get('/total', empleadosController.getTotalEmpleados)    
+    .get('/total', empleadosController.getTotalEmpleados)
+    .get('/empleados-tareas', empleadosController.obtenerTareas)
+    .get('/resumen-tareas', empleadosController.obtenerResumenTareasPorDistrito)
+    .get('/total-tareas', empleadosController.obtenerTotalTareasPorDistrito)
+    .get('/tareas-por-empleado', empleadosController.obtenerTareasPorEmpleadoYFecha)
+    .get('/promedio-tareas-distrito', empleadosController.obtenerPromedioTareasPorDistrito)
+    .get('/detalle-tareas', empleadosController.obtenerDetalleTareasPorMes)
+    .get('/empleados-sin-tareas', empleadosController.obtenerEmpleadosSinTareasPorMes)
+    .get('/total-actividades-distrito', empleadosController.obtenerTotalActividadesPorDistrito)
+
+
     .get('/', empleadosController.get)
     .get('/:id', empleadosController.getById)
+
     .post('/', empleadosController.create)
     .put('/:id', empleadosController.update)
     .delete('/:id', empleadosController._delete);

@@ -1,4 +1,5 @@
 const { models } = require('../libs/sequelize');
+const sequelize = require('../libs/sequelize');
 //const EmpleadosService = require('./empleados.services');
 
 class EmpleadosTareasService {
