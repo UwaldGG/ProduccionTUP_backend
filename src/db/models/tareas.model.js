@@ -25,7 +25,7 @@ const TareasSchema = {
     primaryKey: true,
     autoIncrement: true,
   },
-  Nombre: {
+  Descripcion: {
     type: DataTypes.STRING,
     allowNull: false,
   },

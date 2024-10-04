@@ -11,8 +11,8 @@ const tareasRouter = require('./tareas.router');
 function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router); 
-  //router.use('/persons', personsRouter);
-  router.use('/distritos', distritosRouter); // Agregar el router de distritos
+
+  router.use('/distritos', distritosRouter);
   router.use('/empleados', empleadosRouter);
   router.use('/empleados_tareas', empleadosTareasRouter);
   router.use('/tareas', tareasRouter);

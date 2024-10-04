@@ -45,7 +45,7 @@ class EmpleadosService {
             include: [
               {
                 model: models.Distrito,
-                as: 'Distrito', // Asegúrate de que 'Distrito' es el alias correcto
+                as: 'distrito', // Asegúrate de que 'Distrito' es el alias correcto
                 attributes: ['NombreDistrito'],
               },
             ],
@@ -344,7 +344,50 @@ async obtenerTotalActividadesPorDistrito() {
       console.error("Error al obtener el total de actividades por distrito:", error);
       throw error;
   }
-};
+}
+
+async obtenerEmpleadosPorDistrito(distritoId) {
+    try {
+      if (!distritoId) {
+        throw new Error('distritoId es undefined o null');
+      }
+  
+      // Consultar los empleados con su distrito asociado, filtrando por distritoId
+      const empleadosConDistritos = await models.Empleado.findAll({
+        where: { fk_distrito: distritoId },  // Aquí es donde se filtra por distritoId
+        include: [
+          {
+            model: models.Distrito,
+            as: 'distrito',
+            attributes: ['NombreDistrito'],
+          },
+        ],
+        // Aquí agregamos el ID_Empleado a los atributos
+        attributes: ['ID_Empleado', 'Nombre', 'Apellido'],
+        order: [[{ model: models.Distrito, as: 'distrito' }, 'NombreDistrito', 'ASC']],
+      });
+  
+      // Reestructurar la respuesta agrupando por distrito
+      const empleadosAgrupadosPorDistrito = empleadosConDistritos.reduce((resultado, empleado) => {
+        const distrito = empleado.distrito ? empleado.distrito.NombreDistrito : 'Sin distrito';
+        if (!resultado[distrito]) {
+          resultado[distrito] = [];
+        }
+        resultado[distrito].push({
+          ID_Empleado: empleado.ID_Empleado,  // Asegurarse de incluir ID_Empleado
+          Nombre: empleado.Nombre,
+          Apellido: empleado.Apellido,
+        });
+        return resultado;
+      }, {});
+  
+      return empleadosAgrupadosPorDistrito;
+    } catch (error) {
+      console.error("Error al obtener empleados por distrito:", error);
+      throw error;
+    }
+}
+ 
 
 
 

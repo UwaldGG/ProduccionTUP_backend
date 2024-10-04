@@ -157,9 +157,30 @@ const obtenerTotalActividadesPorDistrito = async (req, res) => {
     }
 };
 
+const obtenerEmpleadosPorDistrito = async (req, res) => {
+    try {
+      const empleadosPorDistrito = await service.obtenerEmpleadosPorDistrito();
+      res.json(empleadosPorDistrito);
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
 
+  const getEmpleadosPorDistrito = async (req, res) => {
+    const distritoId = req.params.distritoId;  // Verifica si se está pasando correctamente
 
+    if (!distritoId) {
+        return res.status(400).json({ message: 'distritoId no proporcionado' });
+    }
 
+    try {
+        const empleados = await service.obtenerEmpleadosPorDistrito(distritoId);
+        res.json(empleados);
+    } catch (error) {
+        console.error("Error en getEmpleadosPorDistrito:", error);
+        res.status(500).json({ message: 'Error fetching empleados', error });
+    }
+};
 
 
 
@@ -178,5 +199,7 @@ module.exports = {
     obtenerPromedioTareasPorDistrito,
     obtenerDetalleTareasPorMes,
     obtenerEmpleadosSinTareasPorMes,
-    obtenerTotalActividadesPorDistrito
+    obtenerTotalActividadesPorDistrito,
+    obtenerEmpleadosPorDistrito,
+    getEmpleadosPorDistrito
 };

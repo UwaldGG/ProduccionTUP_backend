@@ -3,6 +3,8 @@ const router = express.Router();
 const tareasController = require('../controllers/tareas.controller');
 
 router 
+    
+    .get('/registros', tareasController.getRegistros)  
     .get('/total', tareasController.getTotalTareas)
     .get('/', tareasController.get)
     .get('/:id', tareasController.getById)

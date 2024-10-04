@@ -8,11 +8,14 @@ router
     .get('/empleados-tareas', empleadosController.obtenerTareas)
     .get('/resumen-tareas', empleadosController.obtenerResumenTareasPorDistrito)
     .get('/total-tareas', empleadosController.obtenerTotalTareasPorDistrito)
-    .get('/tareas-por-empleado', empleadosController.obtenerTareasPorEmpleadoYFecha)
+    .get('/tareas-por-fecha', empleadosController.obtenerTareasPorEmpleadoYFecha)
     .get('/promedio-tareas-distrito', empleadosController.obtenerPromedioTareasPorDistrito)
     .get('/detalle-tareas', empleadosController.obtenerDetalleTareasPorMes)
     .get('/empleados-sin-tareas', empleadosController.obtenerEmpleadosSinTareasPorMes)
     .get('/total-actividades-distrito', empleadosController.obtenerTotalActividadesPorDistrito)
+    .get('/empleados-por-distrito', empleadosController.obtenerEmpleadosPorDistrito)
+    .get('/por-distrito/:distritoId', empleadosController.getEmpleadosPorDistrito)
+    
 
 
     .get('/', empleadosController.get)

@@ -35,6 +35,27 @@ class TareasService {
         const total = await models.Tarea.count(); // Método count() de Sequelize
         return total;
     }
+
+
+    async findRegistros() {
+        const query = `
+            SELECT 
+                e.ID_Empleado AS empleadoId,
+                e.Nombre AS empleadoNombre,
+                t.ID_Tarea AS tareaId,
+                t.Descripcion AS tareaNombre,
+                r.Mes,
+                r.valor
+            FROM empleados_tareas r
+            INNER JOIN empleados e ON r.fk_empleado = e.ID_Empleado
+            INNER JOIN tareas t ON r.fk_tarea = t.ID_Tarea
+        `;
+
+        const [results] = await sequelize.query(query);
+        return results;
+    }
+
+    
 }
 
 module.exports = TareasService;

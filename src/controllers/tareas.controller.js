@@ -60,7 +60,16 @@ const getTotalTareas = async (req, res) => {
     }
 };
 
+const getRegistros = async (req, res) => {
+    try {
+        const response = await service.findRegistros();
+        res.json(response);
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
 
 module.exports = {
-    create, get, getById, update, _delete, getTotalTareas
+    create, get, getById, update, _delete, getTotalTareas, getRegistros
 };
