@@ -9,7 +9,7 @@ class EmpleadosTareas extends Model {
   static associate(models) {
     this.belongsTo(models.Tarea, { as: 'tareas', foreignKey: 'fk_tarea' });  // Asegúrate de que el alias sea 'Distrito'
     this.belongsTo(models.Empleado, { as: 'empleado', foreignKey: 'fk_empleado' });  // Asegúrate de que el alias sea 'Distrito'
-
+    this.belongsTo(models.Distrito, { as: 'distritos', foreignKey: 'fk_distrito'});
   }
 
   static config (sequelize) {
@@ -29,15 +29,15 @@ const EmpleadosTareasSchema = {
     primaryKey: true,
     autoIncrement: true,
   },
-  Mes: {
+  mes: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Valor: {
+  cantidad: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  Año: {
+  anio: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -47,7 +47,7 @@ const EmpleadosTareasSchema = {
     allowNull: false,
     references: {
       model: 'tareas',
-      key: 'ID_Tareas'
+      key: 'ID_Tarea'
     }
   },
   fk_empleado: {
@@ -57,6 +57,15 @@ const EmpleadosTareasSchema = {
     references: {
       model: 'empleados',
       key: 'ID_Empleado'
+    }
+  },
+  fk_distrito: {
+    fiel: 'fk_distrito',
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'distritos',
+      key: 'ID_Distrito'
     }
   },
 };

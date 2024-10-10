@@ -10,6 +10,9 @@ router
     .get('/total', distritosController.getTotalDistritos)
     .get('/', distritosController.get)
     .get('/:id', distritosController.getById)
+    .get('/distritos/:id', distritosController.obtenerUnDistrito) 
+
+
     .post('/', distritosController.create)
     .put('/:id', distritosController.update)
     .delete('/:id', distritosController._delete);

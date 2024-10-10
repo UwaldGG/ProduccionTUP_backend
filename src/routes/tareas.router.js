@@ -8,6 +8,7 @@ router
     .get('/total', tareasController.getTotalTareas)
     .get('/', tareasController.get)
     .get('/:id', tareasController.getById)
+    
     .post('/', tareasController.create)
     .put('/:id', tareasController.update)
     .delete('/:id', tareasController._delete);

@@ -91,6 +91,16 @@ const getDistritosWithEmployeeCount = async (req, res) => {
   };
 
 
+  // Ruta para obtener un distrito
+    const obtenerUnDistrito = async (req, res) => {
+    const distritoId = req.params.id;
+    Distrito.findByPk(distritoId)
+      .then(distrito => res.json(distrito))
+      .catch(error => res.status(500).json({ error: 'Error al obtener el distrito' }));
+  };
+  
+
+
 module.exports = {
     create, 
     get, 
@@ -100,5 +110,6 @@ module.exports = {
     getTotalDistritos, 
     getDistritos, 
     getWithEmployeeCount,
-    getDistritosWithEmployeeCount
+    getDistritosWithEmployeeCount,
+    obtenerUnDistrito
 };

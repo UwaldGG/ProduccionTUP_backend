@@ -1,7 +1,6 @@
 // src/routes/index.js
 const express = require('express'); 
 
-//const personsRouter = require('./persons.router');
 const distritosRouter = require('./distritos.router'); // Importar el router de distritos
 const empleadosRouter = require('./empleados.router');
 const empleadosTareasRouter = require('./empleados_tareas.router'); 

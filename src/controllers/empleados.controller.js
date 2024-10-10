@@ -184,6 +184,27 @@ const obtenerEmpleadosPorDistrito = async (req, res) => {
 
 
 
+    const empleadosId = async (req, res) => {
+    const empleadoId = req.params.id;
+    Empleado.findByPk(empleadoId)
+      .then(empleado => res.json(empleado))
+      .catch(error => res.status(500).json({ error: 'Error al obtener el empleado' }));
+  };
+
+
+  // Ruta para obtener las tareas de un empleado
+    const obtenerTareasDeUnEmpleado = async (req, res) => {
+    const empleadoId = req.params.empleadoId;
+    EmpleadoTarea.findAll({
+      where: { empleadoId },
+      include: [Tarea] // Incluye el modelo de Tarea
+    })
+    .then(tareas => res.json(tareas))
+    .catch(error => res.status(500).json({ error: 'Error al obtener las tareas del empleado' }));
+  };
+  
+
+
 module.exports = {
     create, 
     get, 
@@ -201,5 +222,7 @@ module.exports = {
     obtenerEmpleadosSinTareasPorMes,
     obtenerTotalActividadesPorDistrito,
     obtenerEmpleadosPorDistrito,
-    getEmpleadosPorDistrito
+    getEmpleadosPorDistrito,
+    empleadosId,
+    obtenerTareasDeUnEmpleado
 };

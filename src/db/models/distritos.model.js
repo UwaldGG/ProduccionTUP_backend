@@ -8,8 +8,8 @@ const DISTRITO_TABLE = 'distritos';
 class Distrito extends Model {
     static associate(models) {
         this.hasMany(models.Empleado, { as: 'empleados', foreignKey: 'fk_distrito' });
-        this.hasMany(models.Tarea, { as: 'tareas', foreignKey: 'fk_distrito' });
-    }
+        this.hasMany(models.EmpleadosTareas, { as: 'empleados_tareas', foreignKey: 'fk_distrito'})
+   }
 
     static config(sequelize) {
         return {
@@ -36,6 +36,10 @@ const DistritoSchema = {
         allowNull: false,
         type: DataTypes.STRING,
     },
+    Contrasenia: {
+        allowNull: false,
+        type: DataTypes.STRING,
+    }
 };
 
 module.exports = { Distrito, DistritoSchema };

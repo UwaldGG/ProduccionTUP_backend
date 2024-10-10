@@ -15,11 +15,12 @@ router
     .get('/total-actividades-distrito', empleadosController.obtenerTotalActividadesPorDistrito)
     .get('/empleados-por-distrito', empleadosController.obtenerEmpleadosPorDistrito)
     .get('/por-distrito/:distritoId', empleadosController.getEmpleadosPorDistrito)
-    
+    .get('/empleados/:id', empleadosController.empleadosId)
+    .get('/empleados/:empleadoId/tareas', empleadosController.obtenerTareasDeUnEmpleado)
 
 
     .get('/', empleadosController.get)
-    .get('/:id', empleadosController.getById)
+    .get('/:id', empleadosController.getById) 
 
     .post('/', empleadosController.create)
     .put('/:id', empleadosController.update)
