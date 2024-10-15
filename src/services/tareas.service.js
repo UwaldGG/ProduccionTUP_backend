@@ -55,7 +55,45 @@ class TareasService {
         return results;
     }
 
-    
+    async getTareasPorEmpleado(idEmpleado) {
+        try {
+          // Consulta para obtener las tareas y valores mensuales del empleado desde la tabla empleados_tareas
+          const tareas = await models.EmpleadosTareas.findAll({
+            where: { fk_empleado: idEmpleado },
+            include: [
+              {
+                model: models.Tarea,
+                as: 'tareas', // Alias usado en la asociación
+                attributes: ['ID_Tarea', 'Descripcion'], // Obtener la descripción de la tarea desde la tabla tareas
+              },
+            ],
+          });
+      
+          // Transformar los resultados en un formato adecuado
+          const tareasPorMes = tareas.reduce((acc, tarea) => {
+            const mes = tarea.mes; // Usar el campo 'mes' como está definido
+            const tareaId = tarea.tareas.ID_Tarea; // Usar el alias 'tareas' para acceder a los datos relacionados
+            const descripcion = tarea.tareas.Descripcion; // Usar el alias 'tareas' para acceder a la descripción
+      
+            if (!acc[tareaId]) {
+              acc[tareaId] = {
+                tareaId,
+                descripcion,
+                valoresMeses: {},
+              };
+            }
+      
+            acc[tareaId].valoresMeses[mes] = tarea.cantidad; // Usar 'cantidad' en lugar de 'Valor'
+            return acc;
+          }, {});
+      
+          // Convertir el objeto en un arreglo para enviarlo al frontend
+          return Object.values(tareasPorMes);
+        } catch (error) {
+          throw new Error(`Error obteniendo tareas para el empleado ${idEmpleado}: ${error.message}`);
+        }
+      }      
+      
 }
 
 module.exports = TareasService;

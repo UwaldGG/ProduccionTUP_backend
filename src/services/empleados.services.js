@@ -387,6 +387,15 @@ async obtenerEmpleadosPorDistrito(distritoId) {
       throw error;
     }
 }
+
+async getEmpleadosPorDistrito2(distritoId) {
+    try {
+      const empleados = await models.Empleado.findAll({ where: { fk_distrito: distritoId } });
+      return empleados;
+    } catch (error) {
+      throw new Error('Error al obtener empleados por distrito');
+    }
+  };
  
 
 

@@ -204,6 +204,16 @@ const obtenerEmpleadosPorDistrito = async (req, res) => {
   };
   
 
+  const getEmpleadosPorDistrito2 = async (req, res) => {
+    const distritoId = req.params.id;
+    try {
+      const empleados = await service.getEmpleadosPorDistrito2(distritoId);
+      res.json(empleados);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
 
 module.exports = {
     create, 
@@ -224,5 +234,6 @@ module.exports = {
     obtenerEmpleadosPorDistrito,
     getEmpleadosPorDistrito,
     empleadosId,
-    obtenerTareasDeUnEmpleado
+    obtenerTareasDeUnEmpleado,
+    getEmpleadosPorDistrito2
 };

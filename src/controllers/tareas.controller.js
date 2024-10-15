@@ -69,7 +69,17 @@ const getRegistros = async (req, res) => {
     }
 };
 
+const getTareasPorEmpleado = async (req, res) => {
+    const { idEmpleado } = req.params;
+
+    try {
+      const tareas = await service.getTareasPorEmpleado(idEmpleado);
+      res.status(200).json(tareas);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
 module.exports = {
-    create, get, getById, update, _delete, getTotalTareas, getRegistros
+    create, get, getById, update, _delete, getTotalTareas, getRegistros, getTareasPorEmpleado
 };

@@ -17,6 +17,8 @@ router
     .get('/por-distrito/:distritoId', empleadosController.getEmpleadosPorDistrito)
     .get('/empleados/:id', empleadosController.empleadosId)
     .get('/empleados/:empleadoId/tareas', empleadosController.obtenerTareasDeUnEmpleado)
+    .get('/empleado-con-distrito/:id', empleadosController.getEmpleadosPorDistrito2)
+
 
 
     .get('/', empleadosController.get)

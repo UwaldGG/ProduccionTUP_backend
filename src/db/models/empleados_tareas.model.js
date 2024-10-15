@@ -60,7 +60,7 @@ const EmpleadosTareasSchema = {
     }
   },
   fk_distrito: {
-    fiel: 'fk_distrito',
+    field: 'fk_distrito',
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
