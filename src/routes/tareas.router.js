@@ -10,6 +10,8 @@ router
     .get('/:id', tareasController.getById)
     .get('/empleado/:idEmpleado', tareasController.getTareasPorEmpleado)
 
+
+
     
     .post('/', tareasController.create)
     .put('/:id', tareasController.update)

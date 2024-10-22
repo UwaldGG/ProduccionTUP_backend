@@ -1,5 +1,5 @@
 // src/controllers/distritos.controller.js
-const DistritosService = require('../services/distritos.service');
+const DistritosService = require('../services/distritos.services');
 const service = new DistritosService();
 const { Distrito } = require('../db/models/distritos.model');
 

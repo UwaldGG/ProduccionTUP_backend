@@ -1,4 +1,4 @@
-const TareasService = require('../services/tareas.service');
+const TareasService = require('../services/tareas.services');
 const service = new TareasService();
 
 const create = async (req, res) => {
@@ -80,6 +80,18 @@ const getTareasPorEmpleado = async (req, res) => {
     }
   }
 
+
 module.exports = {
-    create, get, getById, update, _delete, getTotalTareas, getRegistros, getTareasPorEmpleado
+    create, 
+    get, 
+    getById, 
+    update, 
+    _delete, 
+    getTotalTareas, 
+    getRegistros, 
+    getTareasPorEmpleado,
 };
+
+
+
+

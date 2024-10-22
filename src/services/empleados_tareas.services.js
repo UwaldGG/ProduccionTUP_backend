@@ -31,6 +31,22 @@ class EmpleadosTareasService {
         await model.destroy();
         return { deleted: true };
     }
+
+            // Método para actualizar las tareas
+  async actualizarTareas(tareas) {
+    try {
+      
+      for (const tarea of tareas) {
+        await models.EmpleadosTareas.update(
+          { valoresMeses: tarea.valoresMeses }, // Actualizamos los valores de los meses
+          { where: { fk_tarea: tarea.ID_Tarea } }  // Identificamos la tarea por su ID
+        );
+      }
+      return { message: 'Datos actualizados correctamente' };
+    } catch (error) {
+      throw new Error('Error al actualizar las tareas');
+    }
+  }
 }
 
 module.exports = EmpleadosTareasService;

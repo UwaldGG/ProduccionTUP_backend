@@ -92,8 +92,7 @@ class TareasService {
         } catch (error) {
           throw new Error(`Error obteniendo tareas para el empleado ${idEmpleado}: ${error.message}`);
         }
-      }      
-      
+      }    
 }
 
 module.exports = TareasService;
