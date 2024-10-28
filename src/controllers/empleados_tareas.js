@@ -75,9 +75,25 @@ const actualizarTareas = async (req, res) => {
     }
   };
   
-  
+  const getTareasPorEmpleadoYAnio = async (req, res) => {
+    const { fk_empleado, anio } = req.params;  // Obtiene los parámetros de la solicitud
+    try {
+        const tareas = await service.findByEmpleadoYAnio(fk_empleado, anio);
+        res.status(200).json(tareas);
+    } catch (error) {
+        console.error('Error al obtener tareas por empleado y año:', error);
+        res.status(500).json({ success: false, message: 'Error al obtener tareas' });
+    }
+};
   
 
 module.exports = {
-    create, get, getById, update, _delete, actualizarTareas, actualizarDatosTareas
+    create, 
+    get, 
+    getById, 
+    update,
+    _delete, 
+    actualizarTareas, 
+    actualizarDatosTareas,
+    getTareasPorEmpleadoYAnio
 };

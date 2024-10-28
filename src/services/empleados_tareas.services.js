@@ -73,6 +73,22 @@ class EmpleadosTareasService {
         throw new Error('Error al actualizar las tareas');
       }
     }
+
+    
+    async findByEmpleadoYAnio(fk_empleado, anio) {
+      try {
+          const res = await models.EmpleadosTareas.findAll({
+              where: {
+                  fk_empleado,
+                  anio
+              },
+          });
+          return res;
+      } catch (error) {
+          console.error('Error al obtener tareas por empleado y año:', error);
+          throw new Error('Error al obtener tareas por empleado y año');
+      }
+    }
     
 
 

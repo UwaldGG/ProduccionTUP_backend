@@ -8,6 +8,7 @@ router
     .post('/', EmpleadosTareasController.create)
     .put('/actualizar', EmpleadosTareasController.actualizarTareas)
     .post('/actualizar-datos', EmpleadosTareasController.actualizarDatosTareas)
+    .get('/empleado/:fk_empleado/year/:anio', EmpleadosTareasController.getTareasPorEmpleadoYAnio)
 
     .put('/empleados-tareas/:id', EmpleadosTareasController.update)
     .delete('/:id', EmpleadosTareasController._delete);
