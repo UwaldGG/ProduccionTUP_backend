@@ -32,21 +32,50 @@ class EmpleadosTareasService {
         return { deleted: true };
     }
 
-            // Método para actualizar las tareas
-  async actualizarTareas(tareas) {
-    try {
-      
-      for (const tarea of tareas) {
-        await models.EmpleadosTareas.update(
-          { valoresMeses: tarea.valoresMeses }, // Actualizamos los valores de los meses
-          { where: { fk_tarea: tarea.ID_Tarea } }  // Identificamos la tarea por su ID
-        );
+    async actualizarTareas(tareas) {
+      try {
+        for (const tarea of tareas) {
+          const { fk_empleado, fk_tarea, fk_distrito, anio, cantidad, mes } = tarea;
+    
+          if (!fk_empleado || !fk_tarea || !fk_distrito || !anio || !mes) {
+            console.error("Datos incompletos:", tarea);
+            throw new Error("Datos incompletos para actualizar tareas");
+          }
+          // Intentar encontrar el registro existente
+          let registro = await models.EmpleadosTareas.findOne({
+            where: {
+              fk_empleado,
+              fk_tarea,
+              fk_distrito,
+              anio,
+              mes
+            }
+          });
+    
+          if (registro) {
+            // Si el registro ya existe, actualizar solo la cantidad
+            await registro.update({ cantidad });
+          } else {
+            // Si el registro no existe, crear uno nuevo
+            await models.EmpleadosTareas.create({
+              fk_empleado,
+              fk_tarea,
+              fk_distrito,
+              anio,
+              cantidad,
+              mes
+            });
+          }
+        }
+        return { message: 'Datos de tareas actualizados correctamente' };
+      } catch (error) {
+        console.error('Error al actualizar las tareas:', error);
+        throw new Error('Error al actualizar las tareas');
       }
-      return { message: 'Datos actualizados correctamente' };
-    } catch (error) {
-      throw new Error('Error al actualizar las tareas');
     }
-  }
+    
+
+
 }
 
 module.exports = EmpleadosTareasService;

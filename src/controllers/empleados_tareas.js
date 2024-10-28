@@ -63,37 +63,19 @@ const actualizarTareas = async (req, res) => {
 
   // controller/empleadosTareasController.js
 
-const actualizarDatosTareas = async (req, res) => {
+  const actualizarDatosTareas = async (req, res) => {
+    console.log("datos recibidos en el backend", req.body);
     try {
-      const datosTareas = req.body; // Suponemos que se recibe un arreglo de objetos
-  
-      for (const dato of datosTareas) {
-        const { fk_empleado, fk_tarea, fk_distrito, anio, cantidad, mes } = dato;
-  
-        // Revisa si ya existe un registro para el mes y la tarea de este empleado
-        const [registro, created] = await EmpleadosTareas.findOrCreate({
-          where: {
-            fk_empleado,
-            fk_tarea,
-            fk_distrito,
-            anio,
-            mes
-          },
-          defaults: { cantidad }
-        });
-  
-        if (!created) {
-          // Si el registro ya existe, solo se actualiza la cantidad
-          await registro.update({ cantidad });
-        }
-      }
-  
-      res.status(200).json({ message: 'Datos de tareas actualizados correctamente' });
+      const datosTareas = Array.isArray(req.body) ? req.body : [req.body]; // Convertir a arreglo si es un solo objeto
+      const resultado = await service.actualizarTareas(datosTareas); // Llamada al servicio
+      res.status(200).json(resultado);
     } catch (error) {
       console.error('Error al actualizar los datos de tareas:', error);
       res.status(500).json({ error: 'Error al actualizar los datos de tareas' });
     }
   };
+  
+  
   
 
 module.exports = {
