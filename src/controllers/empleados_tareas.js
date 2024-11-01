@@ -63,7 +63,7 @@ const actualizarTareas = async (req, res) => {
 
   // controller/empleadosTareasController.js
 
-  const actualizarDatosTareas = async (req, res) => {
+const actualizarDatosTareas = async (req, res) => {
     console.log("datos recibidos en el backend", req.body);
     try {
       const datosTareas = Array.isArray(req.body) ? req.body : [req.body]; // Convertir a arreglo si es un solo objeto
@@ -75,7 +75,7 @@ const actualizarTareas = async (req, res) => {
     }
   };
   
-  const getTareasPorEmpleadoYAnio = async (req, res) => {
+const getTareasPorEmpleadoYAnio = async (req, res) => {
     const { fk_empleado, anio } = req.params;  // Obtiene los parámetros de la solicitud
     try {
         const tareas = await service.findByEmpleadoYAnio(fk_empleado, anio);
@@ -85,8 +85,20 @@ const actualizarTareas = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al obtener tareas' });
     }
 };
-  
 
+
+const obtenerConsolidadoPorDistrito = async (req, res) => {
+    const { ID_Distrito } = req.params;
+    const { anio } = req.query;
+    try {
+      const tareas = await service.obtenerConsolidadoPorDistrito(ID_Distrito, anio);
+      res.status(200).json(tareas);
+    } catch (error) {
+      console.error('Error al obtener consolidado por distrito y año', error);
+      res.status(500).json({ success: false, message: 'Error al obtener consolidado' });
+    }
+  };
+  
 module.exports = {
     create, 
     get, 
@@ -95,5 +107,6 @@ module.exports = {
     _delete, 
     actualizarTareas, 
     actualizarDatosTareas,
-    getTareasPorEmpleadoYAnio
+    getTareasPorEmpleadoYAnio,
+    obtenerConsolidadoPorDistrito
 };

@@ -73,7 +73,6 @@ class EmpleadosTareasService {
         throw new Error('Error al actualizar las tareas');
       }
     }
-
     
     async findByEmpleadoYAnio(fk_empleado, anio) {
       try {
@@ -89,9 +88,33 @@ class EmpleadosTareasService {
           throw new Error('Error al obtener tareas por empleado y año');
       }
     }
+
+    
+    // empleados_services.js
+    async obtenerConsolidadoPorDistrito(fk_distrito, anio) {
+      try {
+        const resultado = await models.EmpleadosTareas.findAll({
+          attributes: [
+            'fk_tarea',
+            'mes',
+            [sequelize.fn('SUM', sequelize.col('cantidad')), 'total']
+          ],
+          where: {
+            fk_distrito,
+            anio
+          },
+          group: ['fk_tarea', 'mes'],
+          order: [['fk_tarea', 'ASC'], ['mes', 'ASC']]
+        });
+        return resultado;
+      } catch (error) {
+        console.error('Error al obtener el consolidado por distrito:', error);
+        throw new Error('Error al obtener el consolidado por distrito');
+      }
+    }
+   
+}
     
 
-
-}
 
 module.exports = EmpleadosTareasService;
