@@ -112,8 +112,7 @@ class EmpleadosTareasService {
         throw new Error('Error al obtener el consolidado por distrito');
       }
     }
-
-
+  
     async obtenerConsolidadoPorAnio(anio) {
       try {
           const resultado = await models.EmpleadosTareas.findAll({
@@ -133,8 +132,8 @@ class EmpleadosTareasService {
           console.error('Error al obtener el consolidado por año:', error);
           throw new Error('Error al obtener el consolidado por año');
       }
-  }  
-   
+  } 
+  
 }
-    
+
 module.exports = EmpleadosTareasService;
