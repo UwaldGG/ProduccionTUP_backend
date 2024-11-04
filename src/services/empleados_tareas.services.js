@@ -112,9 +112,29 @@ class EmpleadosTareasService {
         throw new Error('Error al obtener el consolidado por distrito');
       }
     }
+
+
+    async obtenerConsolidadoPorAnio(anio) {
+      try {
+          const resultado = await models.EmpleadosTareas.findAll({
+              attributes: [
+                  'fk_tarea',
+                  'mes',
+                  [sequelize.fn('SUM', sequelize.col('cantidad')), 'total']
+              ],
+              where: {
+                  anio: anio // Filtra por el año proporcionado
+              },
+              group: ['fk_tarea', 'mes'],
+              order: [['fk_tarea', 'ASC'], ['mes', 'ASC']]
+          });
+          return resultado;
+      } catch (error) {
+          console.error('Error al obtener el consolidado por año:', error);
+          throw new Error('Error al obtener el consolidado por año');
+      }
+  }  
    
 }
     
-
-
 module.exports = EmpleadosTareasService;

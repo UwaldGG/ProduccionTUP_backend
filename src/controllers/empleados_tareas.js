@@ -98,6 +98,17 @@ const obtenerConsolidadoPorDistrito = async (req, res) => {
       res.status(500).json({ success: false, message: 'Error al obtener consolidado' });
     }
   };
+
+  const obtenerConsolidadoPorAnio = async (req, res) => {
+    const { anio } = req.params; // Obtiene el año de los parámetros de la solicitud
+    try {
+        const tareas = await service.obtenerConsolidadoPorAnio(anio); // Llama al servicio
+        res.status(200).json(tareas); // Responde con los datos consolidados
+    } catch (error) {
+        console.error('Error al obtener consolidado por año:', error);
+        res.status(500).json({ success: false, message: 'Error al obtener consolidado' });
+    }
+};
   
 module.exports = {
     create, 
@@ -108,5 +119,6 @@ module.exports = {
     actualizarTareas, 
     actualizarDatosTareas,
     getTareasPorEmpleadoYAnio,
-    obtenerConsolidadoPorDistrito
+    obtenerConsolidadoPorDistrito,
+    obtenerConsolidadoPorAnio
 };
