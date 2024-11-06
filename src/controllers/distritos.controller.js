@@ -92,7 +92,7 @@ const getDistritosWithEmployeeCount = async (req, res) => {
 
 
   // Ruta para obtener un distrito
-    const obtenerUnDistrito = async (req, res) => {
+const obtenerUnDistrito = async (req, res) => {
     const distritoId = req.params.id;
     Distrito.findByPk(distritoId)
       .then(distrito => res.json(distrito))

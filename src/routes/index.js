@@ -5,6 +5,7 @@ const distritosRouter = require('./distritos.router'); // Importar el router de 
 const empleadosRouter = require('./empleados.router');
 const empleadosTareasRouter = require('./empleados_tareas.router'); 
 const tareasRouter = require('./tareas.router');
+const authRouter = require('./auth.router')
 
 
 function routerApi(app) {
@@ -15,6 +16,7 @@ function routerApi(app) {
   router.use('/empleados', empleadosRouter);
   router.use('/empleados_tareas', empleadosTareasRouter);
   router.use('/tareas', tareasRouter);
+  router.use('/auth', authRouter);
 
 
 }
